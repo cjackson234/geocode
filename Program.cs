@@ -1,3 +1,6 @@
+using Geocode.Interfaces;
+using Geocode.Services;
+
 namespace Geocode
 {
     public class Program
@@ -7,6 +10,7 @@ namespace Geocode
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddScoped<IGeoDataImport, GeoDataImport>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
