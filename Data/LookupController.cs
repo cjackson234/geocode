@@ -2,7 +2,6 @@
 using Geocode.Models;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Geocode.Controllers
 {
@@ -12,18 +11,28 @@ namespace Geocode.Controllers
     {
         private readonly IGeocode _geocode;
 
-        LookupController(IGeocode geocode)
+        public LookupController(IGeocode geocode)
         {
             _geocode = geocode;
         }
 
-        [HttpGet]
+        /// <summary>
+        /// Returns all data matching provided zipcode
+        /// </summary>
+        /// <param name="zipcode"></param>
+        /// <returns></returns>
+        [HttpGet("Zipcode")]
         public async Task<GeocodeLookupResponse> ZipcodeLookup(int zipcode)
         {
             return await _geocode.ZipcodeLookup(zipcode);
         }
 
-        [HttpGet]
+        /// <summary>
+        /// Returns all data matching provided keyword
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <returns></returns>
+        [HttpGet("Keyword")]
         public async Task<GeocodeLookupResponse> KeywordLookup(string keyword)
         {
             return await _geocode.KeywordLookup(keyword);
