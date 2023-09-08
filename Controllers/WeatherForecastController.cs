@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace geocode.Controllers
+namespace Geocode.Controllers
 {
     [ApiController]
     [Route("[controller]")]

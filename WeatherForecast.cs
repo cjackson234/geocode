@@ -1,4 +1,4 @@
-namespace geocode
+namespace Geocode
 {
     public class WeatherForecast
     {
