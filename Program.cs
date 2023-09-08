@@ -1,16 +1,25 @@
+using Geocode.Data;
 using Geocode.Interfaces;
 using Geocode.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Geocode
 {
     public class Program
     {
+        public static IConfiguration Configuration { get; }
+
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddScoped<IGeoDataImport, GeoDataImport>();
+            builder.Services.AddSingleton<IGeoDataImport, GeoDataImport>();
+            builder.Services.AddSingleton(typeof(IServiceScopeFactory<>), typeof(ServiceScopeFactory<>));
+
+            builder.Services.AddDbContext<GeoDataContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("Database")));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
