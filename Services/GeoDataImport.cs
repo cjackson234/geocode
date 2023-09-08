@@ -22,9 +22,6 @@ namespace Geocode.Services
                     // Process each record
                 }
             }
-            //parse data into GeoData objects
-
-            //save data to database
 
             return Task.FromResult(true);
         }

@@ -8,7 +8,7 @@ namespace Geocode.Helpers
     {
         public object ConvertFromString(string text, IReaderRow row, MemberMapData memberMapData)
         {
-            return text.Split('|').Select(value => (T)Convert.ChangeType(value.Trim(), typeof(T))).ToList();
+            return text.Split('|').ToList();
         }
 
         public string ConvertToString(object value, IWriterRow row, MemberMapData memberMapData)
