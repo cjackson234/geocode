@@ -6,7 +6,7 @@ namespace Geocode.Models
     {
         [Key]
         public Guid Id { get; set; }
-        public string Zip { get; set; }
+        public int Zip { get; set; }
         public double Lat { get; set; }
         public double Lng { get; set; }
         public string City { get; set; }
@@ -24,6 +24,11 @@ namespace Geocode.Models
         public bool Imprecise { get; set; }
         public bool Military { get; set; }
         public string Timezone { get; set; }
+
+        public static implicit operator List<object>(GeoData? v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class CountyFipsData

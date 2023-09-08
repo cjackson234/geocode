@@ -4,12 +4,12 @@ namespace Geocode.Helpers
 {
     public static class Transformers
     {
-        public static GeoData Transform(this CsvGeoData data)
+        public static Models.GeoData Transform(this CsvGeoData data)
         {
-            return new GeoData()
+            return new Models.GeoData()
             {
                 Id = Guid.NewGuid(),
-                Zip = data.Zip,
+                Zip = int.Parse(data.Zip),
                 Lat = data.Lat,
                 Lng = data.Lng,
                 City = data.City,
