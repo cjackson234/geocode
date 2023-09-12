@@ -11,7 +11,7 @@ namespace Geocode.Controllers
         private readonly IGeoDataImport _geoDataImport;
         readonly ILogger<ImportController> _log;
 
-        public ImportController(IGeoDataImport geoDataImport, ILogger<LookupController> log)
+        public ImportController(IGeoDataImport geoDataImport, ILogger<ImportController> log)
         {
             _geoDataImport = geoDataImport;
             _log = log;
