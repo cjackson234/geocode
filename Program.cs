@@ -16,6 +16,7 @@ namespace Geocode
 
             // Add services to the container.
             builder.Services.AddSingleton<IGeoDataImport, GeoDataImport>();
+            builder.Services.AddSingleton<IGeocode, GeocodeService>();
             builder.Services.AddSingleton(typeof(IServiceScopeFactory<>), typeof(ServiceScopeFactory<>));
 
             builder.Services.AddDbContext<GeoDataContext>(options =>

@@ -6,10 +6,10 @@ using System.Reflection.Emit;
 
 namespace Geocode.Services
 {
-    public class Geocode : IGeocode
+    public class GeocodeService : IGeocode
     {
         readonly IServiceScopeFactory<GeoDataContext> _context;
-        public Geocode(IServiceScopeFactory<GeoDataContext> context)
+        public GeocodeService(IServiceScopeFactory<GeoDataContext> context)
         {
             _context = context;
         }
@@ -29,11 +29,12 @@ namespace Geocode.Services
             var db = scope.GetRequiredService();
 
             var data = await db.GeoData
-                .Where(x => x.City == Keyword)
-                .Where(x => x.StateName == Keyword)
-                .Where(x => x.CountyName == Keyword)
-                .Where(x => x.Zip.ToString() == Keyword)
-                .ToListAsync();
+               .Where(x => x.City.Contains(Keyword) ||
+                 x.StateName == Keyword ||
+                 x.CountyName == Keyword ||
+                 x.Zip.ToString() == Keyword)
+               .Take(10)
+               .ToListAsync();
             return new GeocodeLookupResponse()
             {
                 Data = data,
@@ -49,8 +50,8 @@ namespace Geocode.Services
             var data = await db.GeoData.Where(x => x.Zip == zipcode).ToListAsync();
             return new GeocodeLookupResponse()
             {
-               Data = data,
-               Success = true
+                Data = data,
+                Success = true
             };
         }
     }
