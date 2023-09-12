@@ -3,6 +3,8 @@ using Geocode.Interfaces;
 using Geocode.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Serilog;
+using Serilog.Core;
 
 namespace Geocode
 {
@@ -13,9 +15,12 @@ namespace Geocode
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Host.UseSerilog((ctx, lc)
+                                    => lc.ReadFrom.Configuration(ctx.Configuration));
 
             // Add services to the container.
             builder.Services.AddSingleton<IGeoDataImport, GeoDataImport>();
+            builder.Services.AddSingleton<IGeocode, Geocode.Services.Geocode>();
             builder.Services.AddSingleton(typeof(IServiceScopeFactory<>), typeof(ServiceScopeFactory<>));
 
             builder.Services.AddDbContext<GeoDataContext>(options =>
@@ -43,6 +48,7 @@ namespace Geocode
 
             app.UseAuthorization();
 
+            app.UseMiddleware<SerilogRequestLogger>();
 
             app.MapControllers();
 
