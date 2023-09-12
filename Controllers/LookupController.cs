@@ -43,5 +43,16 @@ namespace Geocode.Controllers
             _log.LogInformation("KeywordLookup attempting for keyword: {@KeyWord}", keyword);
             return await _geocode.KeywordLookup(keyword);
         }
+
+        /// <summary>
+        /// Returns all data matching provided keyword
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <returns></returns>
+        [HttpGet("LatLong")]
+        public async Task<GeocodeLookupResponse> LatLongLookup(double lat, double lng)
+        {
+            return await _geocode.LatLongLookup(lat, lng);
+        }
     }
 }

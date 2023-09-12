@@ -32,6 +32,7 @@ namespace Geocode
             builder.Services.AddSwaggerGen(opt => opt.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
             {
                 Title = "Geocode API",
+                Version = "v1",
                 Description = "Datasource: https://simplemaps.com/data/us-zips"
             }));
 
