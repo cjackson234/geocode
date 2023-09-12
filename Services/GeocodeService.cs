@@ -10,7 +10,7 @@ namespace Geocode.Services
     {
         readonly IServiceScopeFactory<GeoDataContext> _context;
         private ILogger<GeocodeService> _log;
-        public GeocodeService(IServiceScopeFactory<GeoDataContext> context, ILogger<Geocode> log)
+        public GeocodeService(IServiceScopeFactory<GeoDataContext> context, ILogger<GeocodeService> log)
         {
             _context = context;
             _log = log;
