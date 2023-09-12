@@ -9,15 +9,18 @@ namespace Geocode.Controllers
     public class ImportController : ControllerBase
     {
         private readonly IGeoDataImport _geoDataImport;
+        readonly ILogger<ImportController> _log;
 
-        public ImportController(IGeoDataImport geoDataImport)
+        public ImportController(IGeoDataImport geoDataImport, ILogger<LookupController> log)
         {
             _geoDataImport = geoDataImport;
+            _log = log;
         }
 
         [HttpPost]
         public async Task<IActionResult> ImportData()
         {
+            _log.LogInformation("Attempting ImportData");
             var result = await _geoDataImport.ImportData();
             return Ok(result);
         }
