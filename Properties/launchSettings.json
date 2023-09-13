@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "geocode": {
+    "Geocode": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
