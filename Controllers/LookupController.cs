@@ -1,11 +1,13 @@
 ﻿using Geocode.Interfaces;
 using Geocode.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace Geocode.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("AllowAll")]
     [ApiController]
     public class LookupController : ControllerBase
     {
