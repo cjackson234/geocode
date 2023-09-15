@@ -26,6 +26,16 @@ namespace Geocode
             builder.Services.AddDbContext<GeoDataContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("Database")));
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                   builder => builder
+                   .AllowAnyMethod()
+                   .AllowAnyHeader()
+                   .AllowCredentials()
+                   .SetIsOriginAllowed(hostName => true));
+            });
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -49,6 +59,8 @@ namespace Geocode
             app.UseAuthorization();
 
             app.UseMiddleware<SerilogRequestLogger>();
+
+            app.UseCors("AllowAll");
 
             app.MapControllers();
 

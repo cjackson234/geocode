@@ -1,6 +1,7 @@
 ﻿using Azure.Core;
 using Geocode.Interfaces;
 using Geocode.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Emit;
 
@@ -8,6 +9,7 @@ using System.Reflection.Emit;
 namespace Geocode.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("AllowAll")]
     [ApiController]
     public class LookupController : ControllerBase
     {
